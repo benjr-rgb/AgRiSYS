@@ -3,40 +3,39 @@ package model;
 import java.time.LocalDate;
 import exception.ValidationException;
 
-/**
- * InventoryItem = "how much stock do we have of ONE product".
- *
- * It HAS-A Product (this is called composition/association): the item does not
- * copy the product's name or price, it just points to the Product object.
- * Quantity is a double because meat is sold by weight (e.g. 12.5 kg).
- */
 public class InventoryItem {
 
-    private Product product;
-    private double quantity;        // in kg or pieces (depends on product.getUnit())
-    private double reorderLevel;    // warn when quantity falls to this value or below
+    private Product product;        //an object of product
+    private double stock;        // in kg or pieces (depends on product.getUnit())
+    private double reorderLevel;    // warn when stock falls to this value or below
     private LocalDate dateStocked;  // date of the most recent stocking
 
-    /** Constructor used when creating a NEW item: dateStocked = today. */
-    public InventoryItem(Product product, double quantity, double reorderLevel) {
-        this(product, quantity, reorderLevel, LocalDate.now());
+    /*this constructor is for inputing a new item hence at the last constructor
+    it stores the current date, while it calls the other constructors using this
+    */
+    public InventoryItem(Product product, double stock, double reorderLevel) {
+        this(product, stock, reorderLevel, LocalDate.now());
     }
 
-    /** Constructor used when LOADING from a file: we already know the date. */
-    public InventoryItem(Product product, double quantity, double reorderLevel,
+    /* this constructor is used when loading from a file which contains the date already
+     * and this constructor is also called by the other one where it just passes the current date
+     * instead of the stored one */
+    public InventoryItem(Product product, double stock, double reorderLevel,
                          LocalDate dateStocked) {
         this.product = product;
-        this.quantity = quantity;
+        this.stock = stock;
         this.reorderLevel = reorderLevel;
         this.dateStocked = dateStocked;
     }
-
+    
+    // Getters and setters for the attributes
     public Product getProduct() { return product; }
-    public double getQuantity() { return quantity; }
+    public double getStock() { return stock; }
     public double getReorderLevel() { return reorderLevel; }
     public LocalDate getDateStocked() { return dateStocked; }
 
-    /** Changes the reorder level (the "low stock" threshold). */
+    /*Changes the reorder level of a product by taking in a integer
+     * it would throw a exception if the user inputed a negative value*/
     public void setReorderLevel(double reorderLevel) throws ValidationException {
         if (reorderLevel < 0) {
             throw new ValidationException("Reorder level cannot be negative.");
@@ -44,41 +43,46 @@ public class InventoryItem {
         this.reorderLevel = reorderLevel;
     }
 
-    /** Adds stock. The amount must be greater than 0. */
+    /* Adds a stock to the products current amount*/
     public void restock(double amount) throws ValidationException {
+    	//if the amount inputed is 0 or negative, it will throw a exception an and a message
         if (amount <= 0) {
             throw new ValidationException("Restock amount must be greater than 0.");
         }
-        quantity = quantity + amount;
-        // Simplification: the whole stock uses the date of the latest restock.
+        
+        //stock of a product will be increased by a valid amount number
+        stock = stock + amount;
+        //dateStocked variable will be updated as we've updated the number of stock a product has
         dateStocked = LocalDate.now();
     }
 
-    /**
-     * Removes stock. Not used in PM 2, but PM 3 (sales) will call it.
-     * We write it now so we do not have to redesign this class later.
+    /* Deduct inputed amount in the overall stock of a product
      */
     public void deduct(double amount) throws ValidationException {
         if (amount <= 0) {
             throw new ValidationException("Amount to deduct must be greater than 0.");
         }
-        if (amount > quantity) {
-            throw new ValidationException("Not enough stock. Only " + quantity + " left.");
+        if (amount > stock) {
+            throw new ValidationException("Not enough stock. Only " + stock + " left.");
         }
-        quantity = quantity - amount;
+        //Will throw an exception if the amount is greater than the quantities product or if its 0 or negative
+        stock = stock - amount;
     }
 
-    /** True when stock is at or below the reorder level. */
+    //Checker if the stock is low and needs to be reordered
+    //Will return True if the stock is below or equal to the reorderLevel of a product
     public boolean isLowStock() {
-        return quantity <= reorderLevel;
+        return stock <= reorderLevel;
     }
 
-    /** Expiry date = date stocked + shelf life of the product. */
+    /*Expiry date will be calculated by adding the dateStocked days, to the shelf life of the product
+     * so it will return a date which will tell date it will expire
+     * */
     public LocalDate getExpiryDate() {
         return dateStocked.plusDays(product.getShelfLifeDays());
     }
 
-    /** True when today is already past the expiry date. */
+    /*Returns true if the date is already passed the expiry date*/
     public boolean isExpired() {
         return LocalDate.now().isAfter(getExpiryDate());
     }
@@ -92,8 +96,8 @@ public class InventoryItem {
         return !getExpiryDate().isAfter(limit);
     }
 
-    /** One line for the inventory save file: productId|quantity|reorderLevel|date */
+    /* One string line for the inventory save file and is formated as productId|stock|reorderLevel|date with "|" as a separator*/
     public String toFileString() {
-        return product.getId() + "|" + quantity + "|" + reorderLevel + "|" + dateStocked;
+        return product.getId() + "|" + stock + "|" + reorderLevel + "|" + dateStocked;
     }
 }

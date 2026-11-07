@@ -1,6 +1,6 @@
 package model;
 
-/** Chicken is a Meat. The only thing it adds is its own category name. */
+/* Chicken is a Meat. The only thing it adds is its own category name. */
 public class Chicken extends Meat {
 
     public Chicken(String id, String name, String description,

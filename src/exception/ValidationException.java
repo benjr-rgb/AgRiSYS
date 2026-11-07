@@ -1,23 +1,17 @@
 package exception;
 
 /**
- * ValidationException is thrown when the user (or our own code) gives
- * something that breaks a rule, for example:
- *   - an empty name
- *   - a price that is 0 or negative
- *   - restocking a negative amount
- *   - a Clerk trying to do a Manager-only action
- *
- * It "extends Exception", which makes it a CHECKED exception: any method that
- * can throw it must say "throws ValidationException", and whoever calls that
- * method must either catch it (try/catch) or pass it along.
+ * ValidationException is thrown when the user inputed a invalid string,integer, or value and when
+ * a user isn't allowed to access a function, resulting things that will break the code so instead 
+ * of breaking this exception will be thrown
+ * and it will return a error message containing the where it went wrong
+ * 
  */
 public class ValidationException extends Exception {
 
-    // Java asks serializable classes (all exceptions) to have this number. Just ignore it.
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1;
 
-    // The message explains what went wrong. It is what we show to the user.
+    //Prints what went wrong with the input of the user
     public ValidationException(String message) {
         super(message); // pass the message to the parent class (Exception)
     }

@@ -1,6 +1,6 @@
 package model;
 
-//CAN DO ALL
+//HAVE ACCESS TO ALL THE FUNCTIONS HENCE ABSTRACT METHODS canEditProdcuts and canRestock returns TRUE
 public class Manager extends User {
 
     public Manager(String username, String password) {

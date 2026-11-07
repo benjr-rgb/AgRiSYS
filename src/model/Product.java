@@ -1,17 +1,5 @@
 package model;
 
-/**
- * Product is the ABSTRACT parent class of everything the shop sells.
- * "abstract" means you can NOT write "new Product(...)". You must create one
- * of its children instead (Pork, Beef, Chicken, Egg).
- *
- * Everything the children have in common lives here (id, name, price, ...).
- * Things that are different per child are declared abstract and every child
- * must provide its own version (this is POLYMORPHISM).
- *
- * We do not use enums, so the allowed categories and units are plain String
- * arrays that the rest of the program can check against.
- */
 public abstract class Product {
 
    	/* String array that contains the only available categories such as pork, beef, or egg, and when a manager adds a 
@@ -79,12 +67,6 @@ public abstract class Product {
         return pricePerUnit * quantity;
     }
 
-    /**
-     * The first 7 fields of the save line. Every child calls this and then
-     * adds its own extra fields at the end.
-     * Fields are separated by the "|" character.
-     * Format: category|id|name|description|price|unit|shelfLifeDays
-     */
     
     /* This formats the products information in one string to be saved in a text file,
      * it's formatted by writing them by having a seperator "|" for easier file reading

@@ -1,12 +1,5 @@
 package model;
 
-/**
- * User is the abstract parent of Manager and Clerk.
- * The permission methods are abstract: each child decides what it may do.
- * That way the rest of the program asks "can this user restock?" and never
- * needs to check "is this a Manager?" (polymorphism).
- */
-
 //abstract class for manager and clerk
 public abstract class User {
 	

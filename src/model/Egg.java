@@ -1,6 +1,6 @@
 package model;
 
-/**
+/*
  * Egg extends Product directly (eggs are not "Meat"), and has its own extra
  * fields: egg size and how many pieces are in one tray.
  */
@@ -36,7 +36,7 @@ public class Egg extends Product {
 
     @Override
     public String toFileString() {
-        // the 7 shared fields + 2 egg fields = 9 fields (same count as Meat)
+        // the 7 shared fields + 2 egg fields = 9 fields 
         return baseFileString() + "|" + clean(size) + "|" + piecesPerTray;
     }
 }

@@ -7,8 +7,7 @@ package exception;
  */
 public class DataLoadException extends Exception {
 
-    // Java asks serializable classes (all exceptions) to have this number. Just ignore it.
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1;
 
     public DataLoadException(String message) {
         super(message);
