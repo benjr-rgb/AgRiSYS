@@ -9,9 +9,8 @@ import objects.Product;
 
 /**
  * ProductManager handles everything about the product list: add, edit,
- * delete, search, filter, AND all the validation rules.
- *
- * It works together with Inventory: adding a product also creates its stock
+ * delete, search, filter, and all the validation rules.
+ * It works together with Inventory, adding a product also creates its stock
  * entry, and deleting a product also removes it.
  */
 public class ProductManager {
@@ -28,11 +27,8 @@ public class ProductManager {
 
     /** Replaces the whole list (used when loading from a file). */
     public void setProducts(ArrayList<Product> products) { this.products = products; }
-
-    // ------------------------------------------------------------------
+    
     // FINDING
-    // ------------------------------------------------------------------
-
     /** Returns the product with this ID, or null if there is none. */
     public Product findById(String id) {
         for (int i = 0; i < products.size(); i++) {
@@ -76,10 +72,7 @@ public class ProductManager {
         return result;
     }
 
-    // ------------------------------------------------------------------
     // ADD
-    // ------------------------------------------------------------------
-
     /**
      * Adds a new product AND creates its inventory entry.
      * Throws ValidationException (or DuplicateProductException) if a rule is broken.
@@ -112,10 +105,7 @@ public class ProductManager {
         inventory.addItem(new InventoryItem(p, initialQuantity, reorderLevel));
     }
 
-    // ------------------------------------------------------------------
     // EDIT
-    // ------------------------------------------------------------------
-
     /** Edits the fields every product has (name, description, price, unit, shelf life). */
     public void editProduct(String id, String name, String description,
                             double price, String unit, int shelfLifeDays)
@@ -163,10 +153,7 @@ public class ProductManager {
         egg.setPiecesPerTray(piecesPerTray);
     }
 
-    // ------------------------------------------------------------------
     // DELETE
-    // ------------------------------------------------------------------
-
     /** Deletes a product AND its inventory entry. */
     public void deleteProduct(String id) throws ValidationException {
         Product p = findById(id);
@@ -177,10 +164,7 @@ public class ProductManager {
         inventory.removeItem(p.getId());
     }
 
-    // ------------------------------------------------------------------
     // VALIDATION (private helpers, only used inside this class)
-    // ------------------------------------------------------------------
-
     /** Validates a whole product object, including its category-specific fields. */
     private void validateProduct(Product p) throws ValidationException {
         validateFields(p.getId(), p.getName(), p.getDescription(),
