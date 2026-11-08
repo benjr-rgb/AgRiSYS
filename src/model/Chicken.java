@@ -1,16 +1,31 @@
 package model;
 
-/* Chicken is a Meat. The only thing it adds is its own category name. */
-public class Chicken extends Meat {
+public class Chicken extends Product {
 
     public Chicken(String id, String name, String description,
-                double pricePerUnit, String unit, int shelfLifeDays,
-                String cut, boolean frozen) {
-        super(id, name, description, pricePerUnit, unit, shelfLifeDays, cut, frozen);
+            double pricePerUnit, String unit, int shelfLifeDays
+            ) {
+    super(id, name, description, pricePerUnit, unit, shelfLifeDays);
     }
 
     @Override
     public String getCategory() {
         return "Chicken";
     }
+    
+    
+    @Override
+    public String getDetails(){
+        return getDescription();
+    }
+    
+    
+    
+
+    @Override
+    public String toFileString() {
+        //calls the method basefilstring from product then returns with the objects Chickens attributes
+    	return baseFileString();
+    }
 }
+

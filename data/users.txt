@@ -1,0 +1,2 @@
+manager|manager123|Manager
+clerk|clerk123|Clerk

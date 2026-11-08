@@ -1,0 +1,3 @@
+Pork|PPPP123|Porkchop|wow|123.0|Pkg|12
+Pork|PPPP4124512|asf|asdfas|21.0|kg|20
+Pork|PP1242|nafs|asdf|21.0|kg|30
