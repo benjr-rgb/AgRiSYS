@@ -1,18 +1,19 @@
-package service;
+package managers;
 
 import java.util.ArrayList;
-import model.Clerk;
-import model.Manager;
-import model.User;
+
+import objects.Clerk;
+import objects.Manager;
+import objects.User;
 
 /**
  * AuthService keeps the list of user accounts and checks logins.
  */
-public class AuthService {
+public class LoginManager {
 
     private ArrayList<User> users;
 
-    public AuthService() {
+    public LoginManager() {
         users = new ArrayList<User>();
     }
 

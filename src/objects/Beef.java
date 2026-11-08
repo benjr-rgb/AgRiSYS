@@ -1,4 +1,4 @@
-package model;
+package objects;
 
 /* Beef is a Meat. The only thing it adds is its own category name. */
 public class Beef extends Product {

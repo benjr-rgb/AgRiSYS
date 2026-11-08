@@ -1,4 +1,4 @@
-package model;
+package objects;
 
 /*
  * Egg extends from Product directly as it is not part of meat family

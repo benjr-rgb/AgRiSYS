@@ -9,16 +9,16 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import exception.DataLoadException;
-import model.Beef;
-import model.Chicken;
-import model.Clerk;
-import model.Egg;
-import model.InventoryItem;
-import model.Manager;
-import model.Pork;
-import model.Product;
-import model.User;
-import service.Inventory;
+import managers.InventoryManager;
+import objects.Beef;
+import objects.Chicken;
+import objects.Clerk;
+import objects.Egg;
+import objects.InventoryItem;
+import objects.Manager;
+import objects.Pork;
+import objects.Product;
+import objects.User;
 
 
 public class FileHandler {
@@ -123,7 +123,7 @@ public class FileHandler {
     // INVENTORY
     // ------------------------------------------------------------------
 
-    public void saveInventory(Inventory inventory) throws DataLoadException {
+    public void saveInventory(InventoryManager inventory) throws DataLoadException {
         ArrayList<String> lines = new ArrayList<String>();
         for (InventoryItem item : inventory.getItems()) {
             lines.add(item.toFileString());

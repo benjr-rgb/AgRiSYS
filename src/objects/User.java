@@ -1,4 +1,4 @@
-package model;
+package objects;
 
 //abstract class for manager and clerk
 public abstract class User {

@@ -1,11 +1,11 @@
-package service;
+package managers;
 
 import java.util.ArrayList;
 import exception.DuplicateProductException;
 import exception.ValidationException;
-import model.Egg;
-import model.InventoryItem;
-import model.Product;
+import objects.Egg;
+import objects.InventoryItem;
+import objects.Product;
 
 /**
  * ProductManager handles everything about the product list: add, edit,
@@ -17,9 +17,9 @@ import model.Product;
 public class ProductManager {
 
     private ArrayList<Product> products;
-    private Inventory inventory;   // the same Inventory object the system uses
+    private InventoryManager inventory;   // the same Inventory object the system uses
 
-    public ProductManager(Inventory inventory) {
+    public ProductManager(InventoryManager inventory) {
         this.inventory = inventory;
         this.products = new ArrayList<Product>();
     }

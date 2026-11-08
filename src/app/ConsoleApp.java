@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import exception.DataLoadException;
 import exception.ValidationException;
-import model.Beef;
-import model.Chicken;
-import model.Egg;
-import model.InventoryItem;
-import model.Pork;
-import model.Product;
-import model.User;
+import objects.Beef;
+import objects.Chicken;
+import objects.Egg;
+import objects.InventoryItem;
+import objects.Pork;
+import objects.Product;
+import objects.User;
 
 public class ConsoleApp {
 

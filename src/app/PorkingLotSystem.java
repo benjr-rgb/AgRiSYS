@@ -3,14 +3,14 @@ package app;
 import java.util.ArrayList;
 import exception.DataLoadException;
 import exception.ValidationException;
-import model.InventoryItem;
-import model.Product;
-import model.User;
+import managers.LoginManager;
+import managers.InventoryManager;
+import managers.ProductManager;
+import objects.InventoryItem;
+import objects.Product;
+import objects.User;
 import persistence.CsvImporter;
 import persistence.FileHandler;
-import service.AuthService;
-import service.Inventory;
-import service.ProductManager;
 
 public class PorkingLotSystem {
 
@@ -20,17 +20,17 @@ public class PorkingLotSystem {
 
     private FileHandler fileHandler;
     private CsvImporter csvImporter;
-    private Inventory inventory;
+    private InventoryManager inventory;
     private ProductManager productManager;
-    private AuthService authService;
+    private LoginManager authService;
     private User currentUser;   // null when nobody is logged in
 
     public PorkingLotSystem() {
         fileHandler = new FileHandler();
         csvImporter = new CsvImporter();
-        inventory = new Inventory();
+        inventory = new InventoryManager();
         productManager = new ProductManager(inventory);   // shares the same Inventory
-        authService = new AuthService();
+        authService = new LoginManager();
         currentUser = null;
     }
 

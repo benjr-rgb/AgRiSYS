@@ -1,4 +1,4 @@
-package model;
+package objects;
 
 //HAVE ACCESS TO ALL THE FUNCTIONS HENCE ABSTRACT METHODS canEditProdcuts and canRestock returns TRUE
 public class Manager extends User {

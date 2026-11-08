@@ -5,11 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import exception.DataLoadException;
-import model.Beef;
-import model.Chicken;
-import model.Egg;
-import model.Pork;
-import model.Product;
+import objects.Beef;
+import objects.Chicken;
+import objects.Egg;
+import objects.Pork;
+import objects.Product;
 
 /**
  * CsvImporter reads the product list exported from your Google Sheet

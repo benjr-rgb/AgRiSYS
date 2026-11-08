@@ -1,8 +1,8 @@
-package service;
+package managers;
 
 import java.util.ArrayList;
 import exception.ValidationException;
-import model.InventoryItem;
+import objects.InventoryItem;
 
 /**
  * Inventory is the "stock book": it holds ALL InventoryItems and offers
@@ -12,11 +12,11 @@ import model.InventoryItem;
  * These classes only take values, return values, or throw exceptions.
  * That is what lets us plug a JavaFX screen on top later without rewriting.
  */
-public class Inventory {
+public class InventoryManager {
 
     private ArrayList<InventoryItem> items;
 
-    public Inventory() {
+    public InventoryManager() {
         items = new ArrayList<InventoryItem>();
     }
 

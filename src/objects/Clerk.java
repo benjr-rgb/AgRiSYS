@@ -1,4 +1,4 @@
-package model;
+package objects;
 
 //CAN ONLY VIEW PRODUCTS AND INVENTORY HENCE IT RETURNS FALSE ON canEDITPRODUCTS AND canRESTOCK
 public class Clerk extends User {
