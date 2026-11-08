@@ -29,7 +29,6 @@ public class FileHandler {
     public static final String PRODUCTS_FILE = "data/products.txt";
     public static final String INVENTORY_FILE = "data/inventory.txt";
     public static final String USERS_FILE = "data/users.txt";
-    public static final String CSV_FILE = "data/products.csv";   // first-run seed
 
     // Number of fields per line, so we do not repeat "magic numbers" below.
     private static final int MEAT_FIELDS = 7;

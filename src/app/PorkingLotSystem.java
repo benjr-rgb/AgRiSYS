@@ -9,17 +9,15 @@ import managers.ProductManager;
 import objects.InventoryItem;
 import objects.Product;
 import objects.User;
-import persistence.CsvImporter;
 import persistence.FileHandler;
 
 public class PorkingLotSystem {
 
-    // Used on the first run when products come from the CSV file.
+    // Used when a product has no stock entry in inventory.txt yet.
     public static final double DEFAULT_QUANTITY = 50;
     public static final double DEFAULT_REORDER_LEVEL = 10;
 
     private FileHandler fileHandler;
-    private CsvImporter csvImporter;
     private InventoryManager inventory;
     private ProductManager productManager;
     private LoginManager authService;
@@ -27,7 +25,6 @@ public class PorkingLotSystem {
 
     public PorkingLotSystem() {
         fileHandler = new FileHandler();
-        csvImporter = new CsvImporter();
         inventory = new InventoryManager();
         productManager = new ProductManager(inventory);   // shares the same Inventory
         authService = new LoginManager();
@@ -73,27 +70,13 @@ public class PorkingLotSystem {
                         inventory.addItem(new InventoryItem(p, DEFAULT_QUANTITY, DEFAULT_REORDER_LEVEL));
                     }
                 }
-            } else if (fileHandler.fileExists(FileHandler.CSV_FILE)) {
-                // First run: seed from the CSV file.
-                ArrayList<Product> imported = csvImporter.importProducts(FileHandler.CSV_FILE);
-                for (Product p : imported) {
-                    try {
-                        // addProduct validates AND creates the inventory entry.
-                        productManager.addProduct(p, DEFAULT_QUANTITY, DEFAULT_REORDER_LEVEL);
-                    } catch (ValidationException e) {
-                        messages.add("Skipped " + p.getName() + ": " + e.getMessage());
-                    }
-                }
-                messages.add("First run: imported " + productManager.getProducts().size()
-                        + " products from " + FileHandler.CSV_FILE);
             } else {
-                messages.add("No product data found. Starting with an empty product list.");
+                messages.add("No saved products found. Starting with an empty product list.");
             }
         } catch (DataLoadException e) {
             messages.add(e.getMessage());
         }
 
-        messages.addAll(csvImporter.getWarnings());
         messages.addAll(fileHandler.getWarnings());
 
         try {
