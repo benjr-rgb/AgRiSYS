@@ -5,12 +5,8 @@ import exception.ValidationException;
 import objects.InventoryItem;
 
 /**
- * Inventory is the "stock book": it holds ALL InventoryItems and offers
- * methods to find, restock, filter and remove them.
- *
- * Important rule for this package: NO Scanner and NO System.out.println here.
- * These classes only take values, return values, or throw exceptions.
- * That is what lets us plug a JavaFX screen on top later without rewriting.
+ * Inventory it holds ALL InventoryItems and offers
+ * methods to find, restock, filter and remove them
  */
 public class InventoryManager {
 
@@ -22,14 +18,14 @@ public class InventoryManager {
 
     public ArrayList<InventoryItem> getItems() { return items; }
 
-    /** Replaces the whole list (used when loading from a file). */
+    /* Replaces the whole list, used when loading from a file. */
     public void setItems(ArrayList<InventoryItem> items) { this.items = items; }
 
     public void addItem(InventoryItem item) {
         items.add(item);
     }
 
-    /** Finds the stock entry of a product. Returns null if there is none. */
+    /*Finds the stock entry of a product. Returns null if there is none. */
     public InventoryItem findByProductId(String productId) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getProduct().getId().equalsIgnoreCase(productId)) {
